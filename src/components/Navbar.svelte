@@ -1,36 +1,41 @@
+<script>
+    import SignupModal from "./SignupModal.svelte";
 
+    let showModal = false;
+</script>
 
 <style>
+
+    header {
+        display: flex;
+    }
+
     nav {
         display: flex;
-        position: fixed;
-        align-items: center;
         justify-content: space-between;
-        background-color: teal;
-        min-width: 100%;
+        width: 100vw;
     }
 
-    ul {
-        display: flex;
-        list-style: none;
+    .header-buttons button {
+        margin-left: 1vw;
     }
 
-    li {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-    }
 </style>
 
-<nav>
-    <ul>
-        <li>
+<header>
+    <nav>
+        <div class="logo">
+            LOGO
+        </div>
+        <div class="header-buttons">
             <button>
                 Login
             </button>
-            <button>
+            <button on:click={() => (showModal = true)}>
                 Signup
             </button>
-        </li>
-    </ul>
-</nav>
+        </div>
+    </nav>
+</header>
+
+<SignupModal bind:showModal />
