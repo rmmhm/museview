@@ -1,7 +1,22 @@
-<script>
-    import SignupModal from "./SignupModal.svelte";
+<script lang="ts">
+	import { onMount } from "svelte";
+    import SignupModal from './SignupModal.svelte';
+    import LoginModal from './LoginModal.svelte';
 
-    let showModal = false;
+    let signupOpened = false;
+    let loginOpened = false;
+
+    let loggedIn = false;
+
+    function handleLogin() {
+        loggedIn = true;
+    }
+
+    function handleLogout() {
+        loggedIn = false;
+    }
+
+
 </script>
 
 <style>
@@ -22,20 +37,26 @@
 
 </style>
 
+{#if !loggedIn}
 <header>
     <nav>
         <div class="logo">
             LOGO
         </div>
         <div class="header-buttons">
-            <button>
+            <button on:click={() => (loginOpened = true)}>
                 Login
             </button>
-            <button on:click={() => (showModal = true)}>
+            <button on:click={() => (signupOpened = true)}>
                 Signup
             </button>
         </div>
     </nav>
 </header>
-
-<SignupModal bind:showModal />
+{:else}
+<h1>
+    TEST
+</h1>
+{/if}
+<SignupModal bind:signupOpened/>
+<LoginModal bind:loginOpened/>

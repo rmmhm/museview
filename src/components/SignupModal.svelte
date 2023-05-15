@@ -1,59 +1,42 @@
 <script lang="ts">
-    export let showModal: boolean;
-    let dialog: HTMLDialogElement;
-    $: if (showModal && dialog) 
-        dialog.showModal();
+    import {Modal, TextInput, Button} from '@svelteuidev/core';
+    export let signupOpened = false;
 </script>
 
 <style>
-    button {
-        top: 10px;
-        right: 10px;
-        font-size: 24px;
-        position: absolute;
-        background-color: transparent;
-        border: none;
-        cursor: pointer;
+    .checkbox {
+        margin-top: 7px;
+    }
+
+    .button {
+        margin-top: 7px;
     }
 </style>
-
-<!-- svelte-ignore a11y-click-events-have-key-events -->
-<dialog
-    bind:this={dialog}
-    on:close={() => {showModal = false}}
-    on:click|self={() => dialog.close()}
->
-    <div on:click|stopPropagation>
-        <h2>
-            Join Museview
-        </h2>
-        <!-- svelte-ignore a11y-autofocus -->
-        <button autofocus on:click={() => dialog.close()}>X</button>
-        <form action='#'>
-            <section>
-                <div class="signup-row">
-                    <!-- svelte-ignore a11y-label-has-associated-control -->
-                    <label>
-                        Email Address
-                    </label>
-                    <input type="email" name="emailAddress" inputmode="email" value>
-                </div>
-                <div class="signup-row">
-                    <!-- svelte-ignore a11y-label-has-associated-control -->
-                    <label>
-                        Username
-                    </label>
-                    <input type="text" name="username" value>
-                </div>
-                <div class="signup-row">
-                    <!-- svelte-ignore a11y-label-has-associated-control -->
-                    <label>
-                        Password
-                    </label>
-                    <input type="text" name="password" value>
-                </div>
-            </section>
-        </form>
-    </div>
-</dialog>
-
+<Modal centered opened={signupOpened} on:close={() => (signupOpened = false)} title="Join Museview">
+    <form action='#' class="signup-form">
+        <TextInput label="Email Address" />
+        <TextInput label="Username" />
+        <TextInput label="Password" />
+        <div class="checkbox">
+            <input type="checkbox" name="tosAndAge" value="true" />
+            I am at least 13 years old and accept the
+            <br />
+            <a href="/" target="_blank" rel="noopener noreferer">
+                Terms of Service.
+            </a>
+        </div>
+        <div class="checkbox">
+            <input type="checkbox" name="privacy" value="true" />
+            I accept the
+            <a href="/" target="_blank" rel="noopener noreferer">
+                Privacy Policy
+            </a>
+            and consent to 
+            <br />
+            Museview's use of my personal information according to it.
+        </div>
+        <div class="button">
+            <Button type="submit" ripple>Signup</Button>
+        </div>
+    </form>
+</Modal>
