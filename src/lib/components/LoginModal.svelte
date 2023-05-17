@@ -13,7 +13,7 @@
         <TextInput label="Username" />
         <TextInput label="Password" />
         <div class="button">
-            <Button type="submit" ripple>Signup</Button>
+            <Button type="submit" ripple>Login</Button>
         </div>
     </form>
 </Modal>
