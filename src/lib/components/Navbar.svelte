@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { onMount } from "svelte";
+    import {UnstyledButton} from '@svelteuidev/core';
     import SignupModal from './SignupModal.svelte';
     import LoginModal from './LoginModal.svelte';
-
+    
     let signupOpened = false;
     let loginOpened = false;
 
@@ -15,8 +16,13 @@
     function handleLogout() {
         loggedIn = false;
     }
+    
+    let users: any[] = [];
 
-
+    onMount(async () => {
+        const res = await fetch('api/users');
+        users = await res.json();
+    });
 </script>
 
 <style>
@@ -55,7 +61,7 @@
 </header>
 {:else}
 <h1>
-    TEST
+    test
 </h1>
 {/if}
 <SignupModal bind:signupOpened/>

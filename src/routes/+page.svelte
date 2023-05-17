@@ -1,6 +1,7 @@
 <script>
 	import { SvelteUIProvider } from '@svelteuidev/core';
-	import Navbar from '../components/Navbar.svelte';
+	import Navbar from '../lib/components/Navbar.svelte';
+
 </script>
 
 <style>
@@ -18,4 +19,5 @@
 	<h1>
 		Welcome to Museview
 	</h1>
+	
 </SvelteUIProvider>

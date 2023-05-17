@@ -1,10 +1,3 @@
-import { prepareStylesSSR } from '@svelteuidev/core';
-import { connectDB } from './db/mongo';
+// import { prepareStylesSSR } from '@svelteuidev/core';
 
-export const handle = prepareStylesSSR;
-
-connectDB().then((): void => {
-    console.log("Successful connection");
-}).catch((e: Error) => {
-    console.error(e);
-})
+// export const handle = prepareStylesSSR;
