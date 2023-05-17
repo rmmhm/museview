@@ -38,7 +38,25 @@
     }
 
     .header-buttons button {
+        color: #fff;
+        background-color: skyblue;
+        font-size: 14px;
+        line-height: 1;
+        border-radius: 500px;
+        padding: 18px 48px 16px;
+        transition-property: background-color;
+        transition-duration: .3s;
+        border-width: 0;
+        letter-spacing: 2px;
+        min-width: 160px;
+        text-transform: uppercase;
+        white-space: normal;
+        cursor: pointer;
         margin-left: 1vw;
+    }
+
+    .header-buttons button:hover {
+        background-color: lightblue;
     }
 
 </style>
