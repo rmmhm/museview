@@ -1,6 +1,25 @@
 <script lang="ts">
     import {Modal, TextInput, Button} from '@svelteuidev/core';
     export let signupOpened = false;
+
+    let newUser = {
+        email: "",
+        username: "",
+        password: "",
+    }
+
+    async function handleSignup() {
+        const raw = await fetch('api/users', {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newUser),
+        })
+        const res = await raw.json();
+        console.log(res);
+    }
 </script>
 
 <style>
@@ -13,10 +32,10 @@
     }
 </style>
 <Modal centered opened={signupOpened} on:close={() => (signupOpened = false)} title="Join Museview">
-    <form action='#' class="signup-form">
-        <TextInput label="Email Address" />
-        <TextInput label="Username" />
-        <TextInput label="Password" />
+    <form on:submit={handleSignup} class="signup-form">
+        <TextInput bind:value={newUser.email} label="Email Address" required/>
+        <TextInput bind:value={newUser.username} label="Username" required/>
+        <TextInput bind:value={newUser.password} label="Password" required/>
         <div class="checkbox">
             <input type="checkbox" name="tosAndAge" value="true" />
             I am at least 13 years old and accept the

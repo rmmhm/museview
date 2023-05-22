@@ -1,28 +1,28 @@
 <script lang="ts">
 	import { onMount } from "svelte";
     import {UnstyledButton} from '@svelteuidev/core';
+    import {user} from '../../stores/user';
     import SignupModal from './SignupModal.svelte';
     import LoginModal from './LoginModal.svelte';
     
+    let loggedIn = false;
+    let username = "";
+
     let signupOpened = false;
     let loginOpened = false;
-
-    let loggedIn = false;
-
-    function handleLogin() {
-        loggedIn = true;
-    }
+    
+    user.subscribe(value => {
+        loggedIn = value.loggedIn;
+        username = value.username;
+    });
 
     function handleLogout() {
-        loggedIn = false;
+        user.set({
+            loggedIn: false,
+            username: "",
+        })
     }
-    
-    let users: any[] = [];
 
-    onMount(async () => {
-        const res = await fetch('api/users');
-        users = await res.json();
-    });
 </script>
 
 <style>
@@ -78,9 +78,21 @@
     </nav>
 </header>
 {:else}
-<h1>
-    test
-</h1>
+<header>
+    <nav>
+        <div class="logo">
+            LOGO
+        </div>
+        <div class="header-buttons">
+            <button>
+                Welcome {username}
+            </button>
+            <button on:click={handleLogout}>
+                Logout
+            </button>
+        </div>
+    </nav>
+</header>
 {/if}
 <SignupModal bind:signupOpened/>
 <LoginModal bind:loginOpened/>

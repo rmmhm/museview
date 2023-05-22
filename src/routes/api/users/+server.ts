@@ -1,6 +1,6 @@
 import { connectToDatabase } from "../mongo";
 
-export async function GET( {url} ) {
+export async function GET( {url}: {url: URL} ) {
     const collection = (await connectToDatabase()).collection(process.env.MONGODB_USERS ?? "");
     const username = url.searchParams.get('username') ?? "";
     let users = null;
@@ -14,4 +14,11 @@ export async function GET( {url} ) {
         headers: {'Content-type': 'application/json'},
         status: 200,
     });
+}
+
+
+export async function POST( {request}: {request: any} ) {
+    const collection = (await connectToDatabase()).collection(process.env.MONGODB_USERS ?? "");
+    const {newUser} = await request.json();
+    return await collection.insertOne(newUser);
 }
